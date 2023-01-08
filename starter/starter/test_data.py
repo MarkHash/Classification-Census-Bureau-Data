@@ -21,7 +21,7 @@ def test_column_presence_and_type(data):
 
     assert set(data.columns.values).issuperset(set(required_columns.keys()))
 
-    for col_name, format_verification_functin in required_columns.items():
+    for col_name, format_verification_funct in required_columns.items():
         assert format_verification_funct(data[col_name]), f"Column {col_name} failed test {format_verification_funct}"
 
 def test_class_names(data):
