@@ -15,11 +15,9 @@ The dataset was reasonably cleaned using the following conditions:
 - Age is between 17 and 99
 - Hours of work is greater than 0
 
-## Evaluation Data
-
 ## Metrics
 The model was evaluated the following metrics with scores.
 
-- precision score: 0.9658703071672355,
-- recall score: 0.1819935691318328,
-- fbeta score: 0.3062770562770563
+- precision score: 0.7259148618371919
+- recall score: 0.6094043887147336
+- fbeta score: 0.6625766871165644
