@@ -29,7 +29,7 @@ def test_class_names(data):
 
     known_classes = [
         "<=50K",
-        "<=50K"
+        ">50K"
     ]
 
     assert data['salary'].isin(known_classes).all()
