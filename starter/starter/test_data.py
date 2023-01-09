@@ -1,6 +1,7 @@
 import pytest
 import pandas as pd
 
+@pytest.fixture(scope="session")
 def data():
     local_path = ("../data/census.csv")
     df = pd.read_csv(local_path, low_memory=False)
