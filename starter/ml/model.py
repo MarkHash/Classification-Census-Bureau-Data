@@ -7,6 +7,7 @@ import json
 import pandas as pd
 import numpy as np
 from joblib import load
+import os
 
 
 # Optional: implement hyperparameter tuning.
@@ -68,9 +69,9 @@ def inference_preds(X, cat_features):
         Predictions from the model.
     """
 
-    model_file = r'./model/RandomForest.joblib'
-    encoder_file = r'./model/encoder.joblib'
-    lb_file = r'./model/lb.joblib'
+    model_file = os.path.join(os.getcwd(), 'model/RandomForest.joblib')
+    encoder_file = os.path.join(os.getcwd(), 'model/encoder.joblib')
+    lb_file = os.path.join(os.getcwd(), 'model/lb.joblib')
 
     model = load(model_file)
     encoder = load(encoder_file)
