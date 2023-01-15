@@ -4,6 +4,7 @@ import pickle
 import json
 import pandas as pd
 import numpy as np
+import yaml
 
 from fastapi import FastAPI
 from pydantic import BaseModel, Field
@@ -36,17 +37,9 @@ app = FastAPI(
 # This allows sending of data (our TaggedItem) via POST to the API.
 @app.post("/")
 async def inference(body: InferenceData):
-
-    cat_features = [
-    "workclass",
-    "education",
-    "marital-status",
-    "occupation",
-    "relationship",
-    "race",
-    "sex",
-    "native-country",
-    ]
+    with open("config.yaml", "r") as ymlfile:
+        cfg = yaml.safe_load(ymlfile)
+        cat_features = cfg['data']['cat_features']
 
     data = body.dict()
     input_data = pd.DataFrame(data=data.values(), index=data.keys()).T
