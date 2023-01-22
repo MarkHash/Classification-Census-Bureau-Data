@@ -69,9 +69,9 @@ def inference_preds(X, cat_features):
         Predictions from the model.
     """
 
-    model_file = os.path.join(os.getcwd(), 'model/RandomForest.joblib.dvc')
-    encoder_file = os.path.join(os.getcwd(), 'model/encoder.joblib.dvc')
-    lb_file = os.path.join(os.getcwd(), 'model/lb.joblib.dvc')
+    model_file = os.path.join(os.getcwd(), 'model/RandomForest.joblib')
+    encoder_file = os.path.join(os.getcwd(), 'model/encoder.joblib')
+    lb_file = os.path.join(os.getcwd(), 'model/lb.joblib')
 
     model = load(model_file)
     encoder = load(encoder_file)
