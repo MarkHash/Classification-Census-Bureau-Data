@@ -20,7 +20,7 @@ from starter.ml.model import train_model, compute_model_metrics
 
 # Add code to load in the data.
 def data_download(path):
-    data = pd.read_csv(f"{path}/data/census.csv")
+    data = pd.read_csv(f"{path}/data/census.csv.dvc")
     return data
 
 # Optional enhancement, use K-fold cross validation instead of a train-test split.
