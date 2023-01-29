@@ -53,4 +53,26 @@ def train_save_model(X_train, y_train, path):
 def check_metrics(X_test, y_test, path):
     model = load(f"{path}/model/RandomForest.joblib")
     precision, recall, fbeta = compute_model_metrics(y_test, model.predict(X_test))
-    print(f"precision score: {precision}, recall score: {recall}, fbeta score: {fbeta}")
+    print(f"precision score: {precision:.2f}, recall score: {recall:.2f}, fbeta score: {fbeta:.2f}")
+
+def check_sliced_data_metrics(data, cat_features, path):
+    train, test = train_test_split(data, test_size=0.20)
+
+    model = load(f"{path}/model/RandomForest.joblib")
+    encoder = load(f"{path}/model/encoder.joblib")
+    lb = load(f"{path}/model/lb.joblib")
+
+    with open(f'{path}/model/slice_output.txt', 'w') as file:
+        for feature in cat_features:
+            for distinct_val in test[feature].unique():
+                sliced_df = test[test[feature] == distinct_val]
+
+                sliced_X_test, sliced_y_test, encoder, lb = process_data(
+                    sliced_df, categorical_features=cat_features, label="salary", training=False, encoder=encoder, lb=lb)
+
+                precision, recall, fbeta = compute_model_metrics(sliced_y_test, model.predict(sliced_X_test))
+                metrics = f"[feature:{feature}][value:{distinct_val}]| precision: {precision:.2f}, recall: {recall:.2f}, fbeta: {fbeta:.2f}"
+                file.write(metrics + '\n')
+    
+
+

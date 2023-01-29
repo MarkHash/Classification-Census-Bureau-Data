@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 import yaml
 
-from fastapi import FastAPI
+from fastapi import Body, FastAPI
 from pydantic import BaseModel, Field
 from starter.ml.model import inference_preds
 
@@ -35,13 +35,57 @@ app = FastAPI(
 )
 
 # This allows sending of data (our TaggedItem) via POST to the API.
-@app.post("/")
-async def inference(body: InferenceData):
+@app.post("/inference")
+async def inference(inferencedata: InferenceData = Body(
+    examples={
+        "normal": {
+            "summary": "A normal example",
+            "description": "A **normal** inrefence data works correctly",
+            "value": {
+                "workclass": "State-gov",
+                "education": "Bachelors",
+                "marital-status": "Never-married",
+                "occupation": "Adm-clerical",
+                "relationship": "Not-in-family",
+                "race": "White",
+                "sex": "Male",
+                "native-country": "United-States",
+                "age": 39,
+                "fnlgt": 77516,
+                "education-num": 13,
+                "capital-gain": 2174,
+                "capital-loss": 0,
+                "hours-per-week": 40
+            },
+        },
+        "invalid": {
+            "summary": "Invalid example",
+            "description": "An **invalid** inrefence data is rejected with an error",
+            "value": {
+                "workclass": 1,
+                "education": "Bachelors",
+                "marital-status": "Never-married",
+                "occupation": "Adm-clerical",
+                "relationship": "Not-in-family",
+                "race": "White",
+                "sex": "Male",
+                "native-countr": "United-States",
+                "age": 39,
+                "fnlgt": 77516,
+                "education-num": 13,
+                "capital-gain": 2174,
+                "capital-loss": 0,
+                "hours-per-week": 40
+            },
+        },
+    },
+)):
+
     with open("config.yaml", "r") as ymlfile:
         cfg = yaml.safe_load(ymlfile)
         cat_features = cfg['data']['cat_features']
 
-    data = body.dict()
+    data = inferencedata.dict()
     input_data = pd.DataFrame(data=data.values(), index=data.keys()).T
 
     input_data = input_data.rename({"marital_status": "marital-status", 

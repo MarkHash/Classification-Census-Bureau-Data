@@ -26,7 +26,7 @@ def test_post_data_under():
             "capital-loss": 0,
             "hours-per-week": 40
             }
-    r = client.post("/", data=json.dumps(data)) 
+    r = client.post("/inference", data=json.dumps(data)) 
     assert r.status_code == 200
     assert r.json() == {"prediction": "<=50K"}
 
@@ -46,7 +46,7 @@ def test_post_data_over():
             "capital-loss": 0,
             "hours-per-week": 45
             }
-    r = client.post("/", data=json.dumps(data)) 
+    r = client.post("/inference", data=json.dumps(data)) 
     assert r.status_code == 200
     assert r.json() == {"prediction": ">50K"}
 
@@ -64,6 +64,7 @@ def test_post_data_fail():
             "education-num": 13,
             "capital-gain": 2174,
             "capital-loss": 0,
-            "hours-per-week": 40}
-    r = client.post("/", data=json.dumps(data))
+            "hours-per-week": 40
+            }
+    r = client.post("/inference", data=json.dumps(data))
     assert r.status_code == 422
