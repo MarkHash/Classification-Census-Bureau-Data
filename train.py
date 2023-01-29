@@ -1,7 +1,7 @@
 import os
 import yaml
 import logging
-from starter.train_model import data_download, data_split, train_save_model, check_metrics
+from starter.train_model import data_download, data_split, train_save_model, check_metrics, check_sliced_data_metrics
 
 def go():
     logging.basicConfig(level=logging.INFO)
@@ -26,6 +26,10 @@ def go():
     # obtaining metric step
     logging.info("Checking metrics of the model")
     check_metrics(X_test, y_test, root_path)
+
+    # obtaining metric of sliced data step
+    logging.info("Checking metrics of sliced data")
+    check_sliced_data_metrics(data, cat_features, root_path)
 
 if __name__ == "__main__":
     go()

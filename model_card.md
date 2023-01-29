@@ -21,3 +21,9 @@ The model was evaluated the following metrics with scores.
 - precision score: 0.7259148618371919
 - recall score: 0.6094043887147336
 - fbeta score: 0.6625766871165644
+
+## Ethical Considerations
+The data was acquired in 1994, which could be old for practical use.
+
+## Caveats and Recommendations
+The data is biased on gender, which means that the dataset is imbalanced.
