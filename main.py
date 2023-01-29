@@ -36,7 +36,7 @@ app = FastAPI(
 
 # This allows sending of data (our TaggedItem) via POST to the API.
 @app.post("/inference")
-async def inference(*, inferencedata: InferenceData = Body(
+async def inference(inferencedata: InferenceData = Body(
     examples={
         "normal": {
             "summary": "A normal example",
@@ -70,6 +70,24 @@ async def inference(*, inferencedata: InferenceData = Body(
                 "race": "White",
                 "sex": "Male",
                 "native-countr": "United-States",
+                "age": 39,
+                "fnlgt": 77516,
+                "education-num": 13,
+                "capital-gain": 2174,
+                "capital-loss": 0,
+                "hours-per-week": 40
+            },
+        },
+        "default": {
+            "value": {
+                "workclass": "State-gov",
+                "education": "Bachelors",
+                "marital-status": "Never-married",
+                "occupation": "Adm-clerical",
+                "relationship": "Not-in-family",
+                "race": "White",
+                "sex": "Male",
+                "native-country": "United-States",
                 "age": 39,
                 "fnlgt": 77516,
                 "education-num": 13,
